@@ -4,7 +4,7 @@ import time
 algo_list = ["hgqn", "bdq", "ppo", "a2c"] # ["dqn"]
 seed_list = [0,10,20,40,50]
 gpu_list = [0,1,2,3]
-reward_mode = "Baseline_OCC_PPD_with_energy"
+reward_mode = "Baseline_without_energy"
 tradeoff_constant = 10
 
 env_list = ["SemiPhysBuildingSim-v0"]
