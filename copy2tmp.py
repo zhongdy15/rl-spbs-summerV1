@@ -12,10 +12,10 @@ SOURCE_DIR = "/mnt/data1/zdy/rl-spbs-summerV1_gitee/logs"
 
 
 def main():
-    # 1. 设置命令行参数解析
     parser = argparse.ArgumentParser(description="根据匹配字段复制日志文件夹到 /tmp")
 
-    # 第一个参数：目标文件夹的前缀，默认为 'logs'
+    # 1. 第一个参数：目标文件夹的前缀，默认为 'logs'
+    # 使用 nargs='?' 表示这是一个可选的单个参数
     parser.add_argument(
         "prefix",
         nargs='?',
@@ -23,20 +23,21 @@ def main():
         help="目标文件夹的前缀名称 (默认为 logs)"
     )
 
-    # 第二个参数：匹配字段，默认为 '*'
+    # 2. 后续参数：匹配字段列表
+    # 使用 nargs='*' 表示接收后面所有的参数作为一个列表
     parser.add_argument(
-        "pattern",
-        nargs='?',
-        default="*",
-        help="匹配文件夹名称的字段 (默认为 *，即复制所有)"
+        "patterns",
+        nargs='*',
+        help="匹配文件夹名称的字段列表 (支持多个，空格分隔，默认为 * 即复制所有)"
     )
 
     args = parser.parse_args()
 
-    # 2. 创建目标文件夹
-    # 获取当前时间，格式如 2026-01-12-13-45-17
+    # 处理匹配模式逻辑：如果没有输入patterns，则默认为 ['*']
+    match_patterns = args.patterns if args.patterns else ["*"]
+
+    # --- 创建目标文件夹 ---
     current_time = datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
-    # 拼接目标文件夹名称
     dest_folder_name = f"{args.prefix}_{current_time}"
     dest_path = os.path.join("/tmp", dest_folder_name)
 
@@ -47,34 +48,34 @@ def main():
         print(f"[Error] 创建文件夹失败: {e}")
         return
 
-    # 3. 检查源目录是否存在
+    # --- 检查源目录 ---
     if not os.path.exists(SOURCE_DIR):
         print(f"[Error] 源目录不存在: {SOURCE_DIR}")
         return
 
-    # 4. 遍历源目录并复制匹配的文件夹
-    print(f"[Info] 正在从 {SOURCE_DIR} 筛选...")
-    print(f"[Info] 匹配模式: {'所有文件夹' if args.pattern == '*' else args.pattern}")
+    # --- 遍历并复制 ---
+    print(f"[Info] 正在筛选: {match_patterns} (逻辑关系: OR)")
 
     count = 0
     for item in os.listdir(SOURCE_DIR):
         src_item_path = os.path.join(SOURCE_DIR, item)
 
-        # 确保是文件夹才处理
         if os.path.isdir(src_item_path):
             is_match = False
 
-            # 判断匹配逻辑
-            if args.pattern == "*":
+            # --- 核心匹配逻辑修改 ---
+            if "*" in match_patterns:
+                # 如果列表里有 *，则全匹配
                 is_match = True
-            elif args.pattern in item:
-                is_match = True
+            else:
+                # 检查文件名是否包含 match_patterns 中的任意一个字符串
+                # any() 函数：只要有一个条件满足就返回 True
+                if any(pattern in item for pattern in match_patterns):
+                    is_match = True
 
             if is_match:
-                # 拼接目标子路径
                 dst_item_path = os.path.join(dest_path, item)
                 try:
-                    # 使用 copytree 递归复制文件夹
                     shutil.copytree(src_item_path, dst_item_path)
                     print(f"  -> 已复制: {item}")
                     count += 1
