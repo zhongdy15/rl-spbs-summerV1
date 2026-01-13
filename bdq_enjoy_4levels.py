@@ -11,17 +11,8 @@ import torch as th
 
 # 扩增了状态空间之后的模型
 model_dict_2 = {
-                "0103_Baseline_with_energy_const10_A2C": "logs/a2c_Baseline_with_energy_10_2025-01-03-16-01-15/a2c/SemiPhysBuildingSim-v0_1",
-                "0103_Baseline_with_energy_const10_PPO": "logs/ppo_Baseline_with_energy_10_2025-01-03-16-01-15/ppo/SemiPhysBuildingSim-v0_1",
-                "0103_Baseline_with_energy_const10_BDQ": "logs/bdq_Baseline_with_energy_10_2025-01-03-16-50-34/bdq/SemiPhysBuildingSim-v0_1",
-                "0103_Baseline_with_energy_const10_HGQN": "logs/hgqn_Baseline_with_energy_10_2025-01-03-16-01-15/hgqn/SemiPhysBuildingSim-v0_1",
-                "0103_Baseline_with_energy_const10_DQN": "logs/dqn_Baseline_with_energy_10_2025-01-03-16-48-57/dqn/SemiPhysBuildingSim-v0_1",
-
-                "0105_Baseline_OCC_PPD_with_energy_const10_A2C": "logs/a2c_Baseline_OCC_PPD_with_energy_10_2025-01-04-21-10-40/a2c/SemiPhysBuildingSim-v0_1",
-                "0105_Baseline_OCC_PPD_with_energy_const10_PPO": "logs/ppo_Baseline_OCC_PPD_with_energy_10_2025-01-04-21-10-40/ppo/SemiPhysBuildingSim-v0_1",
-                "0105_Baseline_OCC_PPD_with_energy_const1_BDQ": "logs/bdq_Baseline_OCC_PPD_with_energy_1_2025-01-05-11-22-08/bdq/SemiPhysBuildingSim-v0_1",
-                "0105_Baseline_OCC_PPD_with_energy_const10_HGQN": "logs/hgqn_Baseline_OCC_PPD_with_energy_10_2025-01-04-21-10-40/hgqn/SemiPhysBuildingSim-v0_1",
-                "0105_Baseline_OCC_PPD_with_energy_const10_DQN": "logs/dqn_Baseline_OCC_PPD_with_energy_10_2025-01-04-21-14-21/dqn/SemiPhysBuildingSim-v0_1",
+                "0113_Baseline_without_energy_A2C": "logs/a2c_Baseline_without_energy_10_2026-01-12-14-50-15/a2c/SemiPhysBuildingSim-v0_1",
+                "0113_Baseline_without_energy_PPO": "logs/ppo_Baseline_without_energy_10_2026-01-12-14-50-15/ppo/SemiPhysBuildingSim-v0_1",
                 }
 
 reward_mode_list = ["Baseline_without_energy",
@@ -32,23 +23,12 @@ reward_mode_list = ["Baseline_without_energy",
 algo_dict = {"ppo": PPO, "a2c": A2C, "dqn": DQN, "bdq": BDQ, "hgqn": HGQN}
 
 test_model_key_list = [
-    # "0105_Baseline_OCC_PPD_with_energy_const10_A2C",
-    # "0105_Baseline_OCC_PPD_with_energy_const10_PPO",
-    "0105_Baseline_OCC_PPD_with_energy_const1_BDQ",
-    "0105_Baseline_OCC_PPD_with_energy_const10_HGQN",
-    # "0105_Baseline_OCC_PPD_with_energy_const10_DQN",
+    "0113_Baseline_without_energy_A2C",
+    "0113_Baseline_without_energy_PPO",
 ]
 
-# test_model_key_list = [
-#                 # "0103_Baseline_with_energy_const10_A2C",
-#                 # "0103_Baseline_with_energy_const10_PPO",
-#                 # "0103_Baseline_with_energy_const10_BDQ",
-#                 # "0103_Baseline_with_energy_const10_HGQN",
-#                 "0103_Baseline_with_energy_const10_DQN",
-# ]
 
-
-save_folder = "figure/0105_4levels_const10_OCC/"
+save_folder = "figure/0113_Baseline_without_energy/"
 
 
 if not os.path.exists(save_folder):
