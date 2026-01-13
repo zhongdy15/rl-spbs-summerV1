@@ -56,7 +56,7 @@ for model_key in test_model_key_list:
 
     # Extract tradeoff_constant and frame_skip from model_key
     # Assuming the format "constantX_skipY"
-    tradeoff_constant = float(model_key.split("const")[1].split("_")[0])
+    tradeoff_constant = 0 #float(model_key.split("const")[1].split("_")[0])
     frame_skip = 5
 
     env1 = gym.make("SemiPhysBuildingSim-v0",
