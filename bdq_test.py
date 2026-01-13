@@ -1,9 +1,9 @@
 import os
 import time
 
-algo_list = ["bdq", "ppo", "a2c"] # ["dqn"]
+algo_list = ["bdq", "ppo", "a2c"]
 seed_list = [0,10,20,40,50]
-gpu_list = [0,1,2,3]
+gpu_list = [0,1,2]
 reward_mode = "Baseline_without_energy"
 tradeoff_constant = 0
 
