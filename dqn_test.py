@@ -5,7 +5,7 @@ algo_list = ["dqn"]
 seed_list = [0,10,20,40,50]
 gpu_list = [4]
 reward_mode = "Baseline_without_energy"
-tradeoff_constant = 10
+tradeoff_constant = 0
 
 env_list = ["SemiPhysBuildingSim-v0"]
 time_flag = time.strftime("%Y-%m-%d-%H-%M-%S", time.localtime())

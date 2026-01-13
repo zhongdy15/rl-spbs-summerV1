@@ -21,7 +21,7 @@ else:
     from .common.action_transformation import available_action_set, create_action_space, \
         map_action_to_controls, map_controls_to_action
 
-from .common.pmvppd_lookup import SimplifiedPMVPPDLookup
+# from .common.pmvppd_lookup import SimplifiedPMVPPDLookup
 
 class SemiPhysBuildingSimulation(gym.core.Env):
     metadata = {'render.modes': ['human']}
@@ -729,7 +729,7 @@ class SemiPhysBuildingSimulation(gym.core.Env):
         constant = self.tradeoff_constant
 
         if self.reward_mode == "Baseline_without_energy":
-            temperature_bias = self.get_temperature_bias_from_datarecorder()
+            temperature_bias = self.get_temperature_bias_from_datarecorder_2nd()
             reward = - temperature_bias
         elif self.reward_mode == "Baseline_with_energy":
             temperature_bias = self.get_temperature_bias_from_datarecorder()
@@ -749,7 +749,15 @@ class SemiPhysBuildingSimulation(gym.core.Env):
         # Reference: https://ugr-sail.github.io/sinergym/compilation/main/pages/rewards.html
         room_temp = get_latest_observation_from_every_room(self.data_recorder, "room_temp")
         r_t = np.abs(room_temp - T_up) + np.abs(room_temp - T_low) - np.abs(T_up - T_low)
-        # Sum of the biases in every room, temperature_bias > 0, 越接近0越好
+        # Sum of the biases in every room, temperature_bias > 0, 越接近0越好, 越小越好
+        temperature_bias = np.sum(r_t)
+        return temperature_bias
+
+    def get_temperature_bias_from_datarecorder_2nd(self, T_set = 25):
+        # For YangXu Project
+        room_temp = get_latest_observation_from_every_room(self.data_recorder, "room_temp")
+        r_t = (room_temp - T_set)**2
+        # Sum of the biases in every room, temperature_bias > 0, 越接近0越好, 越小越好
         temperature_bias = np.sum(r_t)
         return temperature_bias
 
