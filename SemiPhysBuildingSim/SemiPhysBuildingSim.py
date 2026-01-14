@@ -21,7 +21,7 @@ else:
     from .common.action_transformation import available_action_set, create_action_space, \
         map_action_to_controls, map_controls_to_action
 
-# from .common.pmvppd_lookup import SimplifiedPMVPPDLookup
+from .common.pmvppd_lookup import SimplifiedPMVPPDLookup
 
 class SemiPhysBuildingSimulation(gym.core.Env):
     metadata = {'render.modes': ['human']}
