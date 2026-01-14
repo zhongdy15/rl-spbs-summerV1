@@ -11,8 +11,8 @@ import torch as th
 
 # 扩增了状态空间之后的模型
 model_dict_2 = {
-                "0113_Baseline_without_energy_A2C": "logs/a2c_Baseline_without_energy_10_2026-01-12-14-50-15/a2c/SemiPhysBuildingSim-v0_1",
-                "0113_Baseline_without_energy_PPO": "logs/ppo_Baseline_without_energy_10_2026-01-12-14-50-15/ppo/SemiPhysBuildingSim-v0_1",
+                "0114_Baseline_without_energy_BDQ": "logs/bdq_Baseline_without_energy_0_2026-01-13-13-46-25/bdq/SemiPhysBuildingSim-v0_1",
+                "0114_Baseline_without_energy_PPO": "logs/ppo_Baseline_without_energy_0_2026-01-13-13-46-25/ppo/SemiPhysBuildingSim-v0_1",
                 }
 
 reward_mode_list = ["Baseline_without_energy",
@@ -23,12 +23,12 @@ reward_mode_list = ["Baseline_without_energy",
 algo_dict = {"ppo": PPO, "a2c": A2C, "dqn": DQN, "bdq": BDQ, "hgqn": HGQN}
 
 test_model_key_list = [
-    "0113_Baseline_without_energy_A2C",
-    "0113_Baseline_without_energy_PPO",
+    "0114_Baseline_without_energy_BDQ",
+    "0114_Baseline_without_energy_PPO",
 ]
 
 
-save_folder = "figure/0113_Baseline_without_energy/"
+save_folder = "figure/0114_Baseline_without_energy/"
 
 
 if not os.path.exists(save_folder):
